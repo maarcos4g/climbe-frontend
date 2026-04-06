@@ -2,6 +2,8 @@ import { createBrowserRouter } from "react-router-dom";
 import { AppLayout } from "./pages/layouts/app";
 import { Dashboard } from "./pages/app/dashboard";
 import { LoginPage } from "./pages/auth/login";
+import { Proposals } from "./pages/app/proposals";
+import { Companies } from "./pages/app/companies";
 
 export const router = createBrowserRouter([
   {
@@ -18,11 +20,11 @@ export const router = createBrowserRouter([
       },
       {
         path: '/proposals',
-        element: <h1>Propostas comerciais</h1>
+        element: <Proposals /> 
       },
       {
         path: '/companies',
-        element: <h1>Empresas e Clientes</h1>
+        element: <Companies /> 
       },
       {
         path: '/team',
