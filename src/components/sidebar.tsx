@@ -5,7 +5,8 @@ import { NavLink } from './nav-link'
 export function Sidebar() {
   return (
     <aside
-      className='min-h-screen flex flex-col py-6 border-r border-zinc-700 w-full'
+      // A mágica acontece nesta linha abaixo: trocamos min-h-screen por h-screen sticky top-0
+      className='h-screen sticky top-0 flex flex-col py-6 border-r border-zinc-700 w-full'
     >
       {/* header */}
       <div className='flex items-center justify-between px-3 border-b border-zinc-700 pb-3'>
