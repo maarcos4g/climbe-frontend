@@ -1,5 +1,5 @@
 import { ArrowLeft } from 'lucide-react';
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 interface DrawerProps {
   isOpen: boolean;

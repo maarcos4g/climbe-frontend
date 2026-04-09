@@ -4,6 +4,7 @@ import { Dashboard } from "./pages/app/dashboard";
 import { LoginPage } from "./pages/auth/login";
 import { Proposals } from "./pages/app/proposals";
 import { Companies } from "./pages/app/companies";
+import { Schedule } from "./pages/app/schedule";
 
 export const router = createBrowserRouter([
   {
@@ -16,15 +17,15 @@ export const router = createBrowserRouter([
       },
       {
         path: '/schedule',
-        element: <h1>Agenda</h1>
+        element: <Schedule />
       },
       {
         path: '/proposals',
-        element: <Proposals /> 
+        element: <Proposals />
       },
       {
         path: '/companies',
-        element: <Companies /> 
+        element: <Companies />
       },
       {
         path: '/team',
