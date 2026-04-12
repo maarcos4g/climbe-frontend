@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { Plus, Search, ChevronDown } from 'lucide-react';
-import { Drawer } from '../../components/ui/drawer';
+import { Search } from 'lucide-react';
 
 type Empresa = {
   id: number;
@@ -36,26 +35,18 @@ const EmpresaCard = ({ initials, name, cnpj, tags, active }: any) => (
 );
 
 export function Companies() {
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-
-  const [empresas, setEmpresas] = useState<Empresa[]>([
+  const [empresas] = useState<Empresa[]>([
     { id: 1, initials: "JN", name: "Jotanunes Construtora", cnpj: "12.345.678/0001-99", tags: ['BPO', 'Valuation'], active: true },
     { id: 2, initials: "UT", name: "Universidade Tiradentes", cnpj: "98.765.432/0001-11", tags: ['BPO'], active: true },
     { id: 3, initials: "EX", name: "Empresa X", cnpj: "xx.xxx.xxx/xxxx-xx", tags: ['Financeiro', 'Valuation'], active: false },
   ]);
 
-  const [nome, setNome] = useState("");
-  const [cnpj, setCnpj] = useState("");
-  const [servico, setServico] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
 
-  const handleCriarEmpresa = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!nome || !cnpj || !servico) return;
-    const sigla = nome.substring(0, 2);
-    const novaEmpresaObj: Empresa = { id: Date.now(), initials: sigla, name: nome, cnpj: cnpj, tags: [servico], active: true };
-    setEmpresas([novaEmpresaObj, ...empresas]);
-    setNome(""); setCnpj(""); setServico(""); setIsDrawerOpen(false);
-  };
+  const empresasFiltradas = empresas.filter(emp => 
+    emp.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+    emp.cnpj.includes(searchQuery)
+  );
 
   return (
     <div className="flex flex-col h-full font-sans p-6">
@@ -66,49 +57,24 @@ export function Companies() {
         <div className="flex items-center gap-4">
           <div className="relative w-full max-w-[300px]">
             <Search className="absolute left-3.5 top-2.5 text-zinc-500" size={18} />
-            <input type="text" placeholder="Pesquisar..." className="w-full bg-[#111111] border border-zinc-800 rounded-lg py-2 pl-10 pr-4 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#79C6C0]" />
+            <input 
+              type="text" 
+              placeholder="Pesquisar..." 
+              value={searchQuery} 
+              onChange={(e) => setSearchQuery(e.target.value)} 
+              className="w-full bg-[#111111] border border-zinc-800 rounded-lg py-2 pl-10 pr-4 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#79C6C0]" 
+            />
           </div>
-          <button onClick={() => setIsDrawerOpen(true)} className="bg-[#79C6C0]/20 border border-[#79C6C0]/50 hover:bg-[#79C6C0]/40 text-white px-4 py-2 rounded-lg flex items-center gap-2 text-sm font-medium transition-all cursor-pointer whitespace-nowrap">
-            <Plus size={18} className="text-[#79C6C0]" /> Nova Empresa
-          </button>
         </div>
       </div>
 
       {/* Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 overflow-y-auto custom-scrollbar pb-6 pr-2 items-start">
-        {empresas.map((emp) => (
+        {empresasFiltradas.map((emp) => (
            <EmpresaCard key={emp.id} initials={emp.initials} name={emp.name} cnpj={emp.cnpj} tags={emp.tags} active={emp.active} />
         ))}
       </div>
 
-      {/* Drawer */}
-      <Drawer isOpen={isDrawerOpen} onClose={() => setIsDrawerOpen(false)} title="Criar nova empresa">
-        <form className="space-y-6" onSubmit={handleCriarEmpresa}>
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-white">Nome da Empresa</label>
-            <input type="text" value={nome} onChange={(e) => setNome(e.target.value)} required placeholder="Insira o nome da Empresa" className="w-full bg-[#111111] border border-zinc-800 rounded-lg p-3 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-[#79C6C0]" />
-          </div>
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-white">CNPJ</label>
-            <input type="text" value={cnpj} onChange={(e) => setCnpj(e.target.value)} required placeholder="Ex: 00.000.000/0000-00" className="w-full bg-[#111111] border border-zinc-800 rounded-lg p-3 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-[#79C6C0]" />
-          </div>
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-white">Serviço</label>
-            <div className="relative">
-              <select value={servico} onChange={(e) => setServico(e.target.value)} required className="w-full bg-[#111111] border border-zinc-800 rounded-lg p-3 text-sm text-zinc-400 appearance-none focus:outline-none focus:border-[#79C6C0]">
-                <option value="">Selecione</option>
-                <option value="BPO">BPO</option>
-                <option value="Valuation">Valuation</option>
-                <option value="Financeiro">Financeiro</option>
-              </select>
-              <ChevronDown className="absolute right-4 top-3.5 text-zinc-500 pointer-events-none" size={16} />
-            </div>
-          </div>
-          <button type="submit" className="w-full mt-4 bg-[#79C6C0]/20 border border-[#79C6C0]/50 hover:bg-[#79C6C0]/40 text-white font-medium py-3 rounded-lg flex justify-center items-center gap-2 transition-all cursor-pointer">
-            Salvar Empresa
-          </button>
-        </form>
-      </Drawer>
     </div>
   );
 }
