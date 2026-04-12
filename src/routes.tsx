@@ -5,6 +5,7 @@ import { LoginPage } from "./pages/auth/login";
 import { Proposals } from "./pages/app/proposals";
 import { Companies } from "./pages/app/companies";
 import { Schedule } from "./pages/app/schedule";
+import { Team } from "./pages/app/team";
 
 export const router = createBrowserRouter([
   {
@@ -29,7 +30,7 @@ export const router = createBrowserRouter([
       },
       {
         path: '/team',
-        element: <h1>Equipe</h1>
+        element: <Team /> // <-- Componente real renderizado aqui!
       },
       {
         path: '/settings',
