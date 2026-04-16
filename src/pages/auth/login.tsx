@@ -1,18 +1,24 @@
 import { Input } from "@/components/input";
 import { ArrowRight, Eye, EyeOff, Loader2, Lock, Mail } from "lucide-react";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import googleLogo from '@/assets/google.svg'
 import { useFormState } from "@/hooks/use-form-state";
 import { handleAuthenticate } from "./actions";
 
 export function LoginPage() {
-
+  const navigate = useNavigate()
   const [showPassword, setShowPassword] = useState(false)
 
-  const [{ errors }, handleSubmit, isPending] = useFormState(
-    (data) => handleAuthenticate(data, async (data) => console.log(data))
+  const [{ errors, success }, handleSubmit, isPending] = useFormState(
+    (data) => handleAuthenticate(data, async (data) => console.log('Dados do form: ', data))
   )
+
+  useEffect(() => {
+    if (success) {
+      navigate('/', { replace: true })
+    }
+  }, [success, navigate])
 
   return (
     <div

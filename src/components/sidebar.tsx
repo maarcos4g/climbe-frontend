@@ -5,10 +5,8 @@ import { NavLink } from './nav-link'
 export function Sidebar() {
   return (
     <aside
-      // A mágica acontece nesta linha abaixo: trocamos min-h-screen por h-screen sticky top-0
-      className='h-screen sticky top-0 flex flex-col py-6 border-r border-zinc-700 w-full'
+      className='h-screen max-h-screen top-0 flex flex-col py-6 border-r border-zinc-700 w-full'
     >
-      {/* header */}
       <div className='flex items-center justify-between px-3 border-b border-zinc-700 pb-3'>
         <img src={logo} alt="Logo da Climbe" className='w-26 h-10' />
         <button className='cursor-pointer'>
@@ -16,7 +14,6 @@ export function Sidebar() {
         </button>
       </div>
 
-      {/* nav buttons */}
       <div className='flex flex-col px-3 border-b border-zinc-700 py-3 space-y-3'>
         <h3 className='text-sm font-medium text-zinc-400 uppercase'>Menu principal</h3>
 
@@ -43,7 +40,6 @@ export function Sidebar() {
         </div>
       </div>
 
-      {/* management */}
       <div className='flex flex-col px-3 border-b border-zinc-700 py-3 space-y-3'>
         <h3 className='text-sm font-medium text-zinc-400 uppercase'>Gestão</h3>
 
