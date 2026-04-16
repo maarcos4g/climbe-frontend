@@ -16,7 +16,7 @@ const Card = ({ id, title, service, value, color, onDragStart }: any) => (
     onDragStart={(e) => onDragStart(e, id)}
     className="bg-[#27272A] p-4 rounded-lg border border-zinc-700/50 hover:border-zinc-500 transition-all cursor-grab active:cursor-grabbing shadow-sm hover:shadow-md"
   >
-    <h4 className="text-white font-medium mb-3 text-sm">{title}</h4>
+    <h4 className="text-white font-medium mb-3 text-sm truncate">{title}</h4>
     <div className="flex justify-between items-center mb-4 text-xs">
       <span className={`px-2 py-1 rounded-md font-medium uppercase ${color}`}>{service}</span>
       <span className="text-zinc-400">{value}</span>
@@ -82,7 +82,7 @@ export function Proposals() {
   );
 
   return (
-    <div className="flex flex-col h-full font-sans p-6">
+    <div className="flex flex-col h-full font-sans p-6 overflow-hidden">
       
       <div className="flex justify-between items-center mb-8 gap-4">
         
@@ -99,28 +99,27 @@ export function Proposals() {
               className="w-full bg-[#111111] border border-zinc-800 rounded-lg py-2 pl-10 pr-4 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#79C6C0]" 
             />
           </div>
-          <button onClick={() => setIsDrawerOpen(true)} className="bg-[#79C6C0]/20 border border-[#79C6C0]/50 hover:bg-[#79C6C0]/40 text-white px-4 py-2 rounded-lg flex items-center gap-2 text-sm font-medium transition-all whitespace-nowrap cursor-pointer">
+          <button onClick={() => setIsDrawerOpen(true)} className="bg-[#79C6C0]/30 border border-[#79C6C0]/50 hover:bg-[#79C6C0]/40 text-white px-4 py-2 rounded-lg flex items-center gap-2 text-sm font-medium transition-all whitespace-nowrap cursor-pointer">
             <Plus size={18} className="text-[#79C6C0]" /> Nova proposta
           </button>
         </div>
 
       </div>
 
-      {/* Kanban */}
-      <div className="flex gap-4 overflow-x-auto pb-6 flex-1 items-start custom-scrollbar">
+      {/* Kanban com GRID e sem min-w nas colunas */}
+      <div className="grid grid-cols-4 gap-4 pb-6 flex-1 items-start overflow-y-auto custom-scrollbar pr-2">
         {colunas.map((col) => (
           <div 
             key={col} 
             onDragOver={handleDragOver}
             onDrop={(e) => handleDrop(e, col)}
-            className="bg-[#111111] rounded-xl p-4 min-w-[300px] flex-1 flex flex-col gap-3 border border-zinc-800 min-h-[200px]"
+            className="bg-[#111111] rounded-xl p-4 flex flex-col gap-3 border border-zinc-800 min-h-[200px]"
           >
             <div className="flex justify-between items-center text-zinc-400 px-1 mb-1">
               <span className="text-xs font-semibold uppercase tracking-wider">{col}</span>
               <MoreHorizontal size={16} className="cursor-pointer hover:text-white" />
             </div>
             
-            {/* Renderizando as propostas FILTRADAS ao invés das originais */}
             {propostasFiltradas.filter(p => p.status === col).map(proposta => (
               <Card 
                 key={proposta.id} 
@@ -175,7 +174,7 @@ export function Proposals() {
             </div>
           </div>
 
-          <button type="submit" className="w-full mt-4 bg-[#79C6C0]/20 border border-[#79C6C0]/50 hover:bg-[#79C6C0]/40 text-white font-medium py-3 rounded-lg flex justify-center items-center gap-2 transition-all cursor-pointer">
+          <button type="submit" className="w-full mt-4 bg-[#79C6C0]/30 border border-[#79C6C0]/50 hover:bg-[#79C6C0]/40 text-white font-medium py-3 rounded-lg flex justify-center items-center gap-2 transition-all cursor-pointer">
             Salvar Proposta
           </button>
         </form>
