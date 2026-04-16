@@ -1,5 +1,7 @@
 import { resetPasswordSchema, signInSchema, type ResetPasswordSchema, type SignInSchema } from "./schemas";
 
+import cookie from 'js-cookie'
+
 export async function handleAuthenticate(
   data: FormData,
   authenticate: (variables: SignInSchema) => Promise<void>
@@ -15,7 +17,11 @@ export async function handleAuthenticate(
   const { email, password } = result.data
 
   try {
-    console.log(result.data)
+    await authenticate({ email, password })
+    cookie.set('@token', crypto.randomUUID(), {
+      expires: 7,
+      path: '/'
+    })
   } catch (error) {
     console.error(error)
 
@@ -44,7 +50,7 @@ export async function handleResetPassword(
   const { email } = result.data
 
   try {
-    console.log(result.data)
+    reset({ email })
   } catch (error) {
     console.error(error)
 
