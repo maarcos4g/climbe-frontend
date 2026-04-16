@@ -114,7 +114,7 @@ export function Team() {
           </div>
           <button 
             onClick={() => setIsModalOpen(true)} 
-            className="bg-[#79C6C0]/10 border border-[#79C6C0]/50 hover:bg-[#79C6C0]/20 text-white px-4 py-2 rounded-lg flex items-center gap-2 text-sm font-medium transition-colors cursor-pointer whitespace-nowrap"
+            className="bg-[#79C6C0]/10 border border-[#79C6C0]/50 hover:bg-[#79C6C0]/10 text-white px-4 py-2 rounded-lg flex items-center gap-2 text-sm font-medium transition-colors cursor-pointer whitespace-nowrap"
           >
             <Plus size={18} className="text-[#79C6C0]" /> Novo colaborador
           </button>

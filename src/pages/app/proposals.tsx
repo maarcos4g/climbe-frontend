@@ -22,7 +22,7 @@ const Card = ({ id, title, service, value, color, onDragStart }: any) => (
       <span className="text-zinc-400">{value}</span>
     </div>
     <div className="flex items-center gap-2 text-[10px] text-zinc-400">
-      <img src="https://i.pravatar.cc/150?img=32" alt="Avatar" className="w-5 h-5 rounded-full" />
+      <img src="https://github.com/shadcn.png" alt="Avatar" className="w-5 h-5 rounded-full" />
       criou há 20 dias atrás
     </div>
   </div>
@@ -99,7 +99,7 @@ export function Proposals() {
               className="w-full bg-[#111111] border border-zinc-800 rounded-lg py-2 pl-10 pr-4 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#79C6C0]" 
             />
           </div>
-          <button onClick={() => setIsDrawerOpen(true)} className="bg-[#79C6C0]/30 border border-[#79C6C0]/50 hover:bg-[#79C6C0]/40 text-white px-4 py-2 rounded-lg flex items-center gap-2 text-sm font-medium transition-all whitespace-nowrap cursor-pointer">
+          <button onClick={() => setIsDrawerOpen(true)} className="bg-[#79C6C0]/10 border border-[#79C6C0]/50 hover:bg-[#79C6C0]/40 text-white px-4 py-2 rounded-lg flex items-center gap-2 text-sm font-medium transition-all whitespace-nowrap cursor-pointer">
             <Plus size={18} className="text-[#79C6C0]" /> Nova proposta
           </button>
         </div>
